@@ -30,10 +30,14 @@
 Const char* ssid = "Test_Network";
 Const char* password = "Test_password";
 // Broker Credential Here
-Const char* server = "192.168.1.194";
-Const char* port = "1883";
-Const char* userName = "iotmate";
-Const char* password = "Test_password";
+Const char* mqtt_server = "192.168.1.194";
+Const int* mqtt_port = "1883";
+Const char* mqtt_userName = "iotmate";
+Const char* mqtt_password = "Test_password";
+const char* mqtt_topic = "topic";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 void setup() {
   // put your setup code here, to run once:
@@ -49,8 +53,23 @@ void setup() {
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP()); //show ip address when connected on serial monitor
+
+  // Set up MQTT client
+  client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
+  
+  // Attempt to connect to MQTT broker
+  reconnect();
 }
 
 void loop() { // run over and over
   // put your main code here, to run repeatedly:
+  if (!client.connected()){
+    reconnect(); // Reconnect if connection is lost
+  }
+  client.loop();
+}
+
+void callback(char* topic, byte* payload, unsigned int length){
+  // Callback function to handle incoming MQTT messages.
 }
