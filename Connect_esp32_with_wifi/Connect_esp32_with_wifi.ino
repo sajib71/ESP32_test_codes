@@ -1,8 +1,17 @@
 /*
- * Connect esp32 with WiFi
+ * ESP32 WiFi Connection Example
+ * This program demonstrates how to connect an ESP32 to a WiFi network.
+ * It continuously attempts to connect to the specified WiFi network until a successful connection is established.
+ * Once connected, it prints the local IP address of the ESP32 to the Serial Monitor.
+ *
  * Date: 04 February 2024
- * Name: Sanaullah Sajib
+ * Author: Sanaullah Sajib
+ * 
+ * Hardware Requirements:
+ * - ESP32 Development Board
+ * - WiFi network (SSID and Password)
  */
+ 
 #include <WiFi.h>
 const char* ssid = "Sincos factor";
 const char* passward = "Sincos@1983#";
@@ -24,5 +33,4 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
 }
